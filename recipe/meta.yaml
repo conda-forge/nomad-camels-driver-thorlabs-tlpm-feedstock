@@ -1,5 +1,5 @@
 {% set name = "nomad-camels-driver-thorlabs-TLPM" %}
-{% set version = "0.1.0" %}
+{% set version = "0.1.1" %}
 {% set python_min = "3.10" %}
 
 package:
@@ -7,13 +7,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/nomad_camels_driver_thorlabs_TLPM-{{ version }}.tar.gz
-  sha256: 1121e6b5fccc1176b8c0262ca50ea1f46485e7df0b99da6621750c1de4a626ed
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name | replace('-', '_') | lower }}-{{ version }}.tar.gz
+  sha256: 52566e6ff9ac78c47425c553271770fd7cceec96e8a94f50ff9fe907453ded52
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 2
+  number: 0
 
 requirements:
   host:
