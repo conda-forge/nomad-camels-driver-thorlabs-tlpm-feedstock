@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: nomad-camels-driver-thorlabs-TLPM
+  version: "0.1.1"
+  python_min: "3.10"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name | replace('-', '_') | lower }}-${{ version }}.tar.gz
+  sha256: 52566e6ff9ac78c47425c553271770fd7cceec96e8a94f50ff9fe907453ded52
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python 3.10.*
+    - setuptools >=61.0
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - pylablib
+    - nomad-camels
+
+tests:
+  - python:
+      imports:
+        - nomad_camels_driver_thorlabs_TLPM
+      pip_check: false
+      python_version: ${{ python_min }}
+about:
+  summary: Instrument driver for Thorlabs powermeters for NOMAD-CAMELS
+  license: LGPL-2.1-or-later
+  license_file: LICENSE.txt
+  homepage: https://github.com/FAU-LAP/CAMELS_drivers
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
